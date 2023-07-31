@@ -1,6 +1,6 @@
 import os
 import azure.cognitiveservices.speech as speechsdk
-
+#Hunter
 # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
 speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
 audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
@@ -32,7 +32,7 @@ while True:
     </speak>
     """
 
-    #This should utilize the ssml_string instead of just grabbing the inputted text
+    #This should utilize the ssml_string instead of just grabbing the inputted text (Ragland)
     speech_synthesis_result = speech_synthesizer.speak_ssml_async(ssml_string).get()
 
     #speech_synthesis_result = speech_synthesizer.speak_text_async(text).get()
