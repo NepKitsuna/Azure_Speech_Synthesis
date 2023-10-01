@@ -5,7 +5,9 @@ import azure_speech_VoiceLibrary as library
 # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
 speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY'), region=os.environ.get('SPEECH_REGION'))
 #Selection for default input and output
-audio_output_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
+
+#TODO: Figure out how to send audio to spesified output device
+audio_output_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=False, device_name= 'CABLE_Input')
 audio_input_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
 speech_config.speech_recognition_language="en-US"
 # Trying to set the output to a virtual audio cable
