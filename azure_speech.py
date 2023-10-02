@@ -7,7 +7,7 @@ speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_KEY')
 #Selection for default input and output
 
 #TODO: Figure out how to send audio to spesified output device
-audio_output_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=False, device_name= 'CABLE_Input')
+audio_output_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True) #, device_name= 'CABLE_Input')
 audio_input_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
 speech_config.speech_recognition_language="en-US"
 # Trying to set the output to a virtual audio cable
@@ -18,7 +18,7 @@ speech_config.speech_recognition_language="en-US"
 # #pitch for the voice
 # pitchSetting = '+1.25st'
 
-voiceProfile = library.Neuro()
+voiceProfile = library.Neuro
 
 speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_input_config)
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_output_config)
@@ -73,13 +73,22 @@ while True:
                 break
             elif "SET VOICE" in speech_recognition_result.text.upper():
                 #Check for the voice spoken if it exists in the library
+
                 for i in range(len(library.voiceLibrary)):
-                    if library.voiceLibrary[i] in speech_recognition_result.text.upper():
-                        speaktext("Changing voice to profile " + library.voiceLibrary[i] + ".")
+                    #debug code
+                    #print("Searching for " + speech_recognition_result.text.upper() + ".")
+                    #print("Current voice check:" + library.voiceLibrary[i].name.upper() + " in index " + str(i) + " length is " + str(len(library.voiceLibrary)) + ".\n")
+                  
+
+                    if library.voiceLibrary[i].name.upper() in speech_recognition_result.text.upper():
                         
-                        #voiceProfile = 
-                #TODO Trying to set voices via voice command 
-                #speaktext("No voice profile found")
+                        speaktext("Changing voice to profile " + library.voiceLibrary[i].name + ".")
+                        
+                        voiceProfile = library.voiceLibrary[i]
+
+                    elif i == (len(library.voiceLibrary) - 1):
+                        speaktext("No voice profile found")
+
                 continue
 
         
